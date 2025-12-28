@@ -61,7 +61,7 @@
             padding: 10px 20px; 
             border-radius: 25px; 
             font-size: 1.1em; 
-            font-weight: bold; 
+            font-weight: 600px; 
             margin-bottom: 20px;
             display: inline-block;
         }
@@ -113,6 +113,21 @@
             color: white; 
             border-color: #667eea;
         }
+        .toggle-fact { 
+            background: #ff6b6b; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            font-size: 14px; 
+            cursor: pointer; 
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        .toggle-fact:hover { 
+            background: #ff5252; 
+            transform: translateY(-1px);
+        }
         .check-btn { 
             background: linear-gradient(45deg, #58cc02, #7ed957); 
             color: white; 
@@ -163,10 +178,12 @@
             background: rgba(255,255,255,0.95); 
             border-left: 6px solid #667eea; 
             padding: 20px; 
-            margin: 25px 0; 
+            margin: 15px 0; 
             border-radius: 0 15px 15px 0;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: none;
         }
+        .detail.show { display: block; }
         .label { 
             font-weight: bold; 
             color: #667eea; 
@@ -284,28 +301,28 @@
                 `Brazilian ___ is famous during Rio Carnival celebrations.`
             ],
             multipleChoice: [
-                `What fastens a kimono? A) Belt B) Obi sash C) Ribbon D) Rope`,
-                `Origami uses what material? A) Fabric B) Wood C) Paper D) Clay`,
-                `Kimchi is from which country? A) Japan B) China C) Korea D) Thailand`,
-                `What do Scots wear with tartan patterns? A) Kimono B) Kilt C) Cheongsam D) Obi`,
-                `Venice festival uses what for anonymity? A) Drum B) Mask C) Dance D) Food`,
-                `What drives African celebrations? A) Samba B) Drum C) Hockey D) Rock music`,
-                `Brazilian carnival dance is called? A) Belly dance B) Samba C) Ballet D) Tango`,
-                `What shaped global pop culture? A) Ice hockey B) Rock music C) Origami D) Kimchi`,
-                `Graceful Middle Eastern dance? A) Samba B) Belly dance C) Kilt dance D) Mask dance`,
-                `Canada\'s national winter sport? A) Soccer B) Ice hockey C) Basketball D) Tennis`
+                `What fastens a kimono? A) Obi sash B) Belt C) Ribbon D) Rope`,
+                `Origami uses what material? A) Paper B) Fabric C) Wood D) Clay`,
+                `Kimchi is from which country? A) Korea B) Japan C) China D) Thailand`,
+                `What do Scots wear with tartan patterns? A) Kilt B) Kimono C) Cheongsam D) Obi`,
+                `Venice festival uses what for anonymity? A) Mask B) Drum C) Dance D) Food`,
+                `What drives African celebrations? A) African drum B) Samba C) Hockey D) Rock music`,
+                `Brazilian carnival dance is called? A) Samba B) Belly dance C) Ballet D) Tango`,
+                `What shaped global pop culture? A) Rock music B) Ice hockey C) Origami D) Kimchi`,
+                `Graceful Middle Eastern dance? A) Belly dance B) Samba C) Kilt dance D) Mask dance`,
+                `Canada\'s national winter sport? A) Ice hockey B) Soccer C) Basketball D) Tennis`
             ],
             mixed: [
-                `The ___ (cheongsam/kilt) is China\'s elegant traditional dress for brides.`,
+                `The ___ is China\'s elegant traditional dress for brides.`,
                 `Create a sentence using "origami": ______________________________`,
                 `Which is NOT a Korean tradition? A) Kimchi B) Kimono C) Hanbok D) Bibimbap`,
-                `Venice\'s famous ___ (mask/Carnival) allows anonymity during parties.`,
+                `Venice\'s famous ___ allows anonymity during parties.`,
                 `True/False: Ice hockey originated in Africa.`,
                 `What do you call Brazilian carnival music/dance? ___`,
-                `African drum → Used for ___ (dancing/communication/decorating)`,
-                `The ___ (belly dance/rock music) emphasizes graceful hip movements.`,
+                `African drum → Used for ___`,
+                `The ___ emphasizes graceful hip movements.`,
                 `Reorder: paper / origami / transforms / into / art`,
-                `Why is kimchi important? It\'s Korea\'s ___ (national dish/staple food).`
+                `Why is kimchi important? It\'s Korea\'s ___ dish.`
             ]
         };
 
@@ -315,6 +332,8 @@
         let bingoWords = [];
         let currentAnswers = [];
         let currentQuestionType = 'fillBlank';
+        let currentFact = '';
+        let factVisible = false;
 
         function init() {
             shuffleQuestionSet();
@@ -326,41 +345,58 @@
             const types = Object.keys(questionSets);
             currentQuestionType = types[Math.floor(Math.random() * types.length)];
             currentAnswers = questionSets[currentQuestionType];
-            // Shuffle for variety
             for (let i = currentAnswers.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [currentAnswers[i], currentAnswers[j]] = [currentAnswers[j], currentAnswers[i]];
+            }
+            currentFact = vocabData[Math.floor(Math.random() * vocabData.length)].fact;
+        }
+
+        function toggleFact() {
+            factVisible = !factVisible;
+            const detail = document.querySelector('.detail');
+            const button = document.querySelector('.toggle-fact');
+            if (factVisible) {
+                detail.classList.add('show');
+                button.textContent = '🙈 Hide Fact';
+            } else {
+                detail.classList.remove('show');
+                button.textContent = '💡 Show Fact';
             }
         }
 
         function showQuestion(index) {
             const container = document.getElementById('quizContainer');
             const question = currentAnswers[index % 10];
-            const isMC = currentQuestionType === 'multipleChoice' || question.includes('A)');
+            const isMC = currentQuestionType === 'multipleChoice';
             
             container.innerHTML = `
                 <div class="current-question">
                     <div class="question-number">Question ${index + 1} of ${totalQuestions}</div>
                     <div class="question-text">${question}</div>
                     
-                    ${isMC ? generateMCOptions(question) : '<input type="text" id="answerInput" placeholder="Type your answer here..." autofocus>'}
+                    ${isMC ? generateMCOptions(index) : '<input type="text" id="answerInput" placeholder="Type your answer here..." autofocus>'}
                     
+                    <button class="toggle-fact" onclick="toggleFact()">💡 Show Fact</button>
                     <div class="detail">
                         <span class="label">💡 Extra Fact:</span>
-                        ${vocabData[Math.floor(Math.random() * vocabData.length)].fact}
+                        ${currentFact}
                     </div>
                     
                     <button class="check-btn" onclick="checkCurrentAnswer()">✅ Check Answer</button>
                     <div id="currentFeedback"></div>
                 </div>
             `;
+            factVisible = false;
         }
 
-        function generateMCOptions(question) {
+        function generateMCOptions(index) {
+            const mcQuestions = questionSets.multipleChoice;
+            const question = mcQuestions[index % 10];
             const options = question.split('?')[1].trim().split(' ');
             return `
                 <div class="mc-options">
-                    ${options.map(opt => `<div class="mc-option" onclick="selectOption(this)">${opt}</div>`).join('')}
+                    ${options.map((opt, i) => `<div class="mc-option" onclick="selectOption(this)">${opt}</div>`).join('')}
                 </div>
             `;
         }
