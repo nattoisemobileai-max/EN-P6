@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 6 - International Week Quiz</title>
+    <title>Unit 6 - World Cultures Duolingo Quiz</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -61,7 +61,6 @@
             padding: 10px 20px; 
             border-radius: 25px; 
             font-size: 1.1em; 
-            font-weight: 600px; 
             margin-bottom: 20px;
             display: inline-block;
         }
@@ -86,14 +85,14 @@
             border-color: #667eea; 
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
         }
-        .mc-options { 
+        .mc-options, .tf-options { 
             display: flex; 
             flex-direction: column; 
             gap: 12px; 
             max-width: 500px; 
             margin: 0 auto;
         }
-        .mc-option { 
+        .mc-option, .tf-option { 
             padding: 20px; 
             background: white; 
             border: 3px solid #eee; 
@@ -103,16 +102,17 @@
             font-size: 16px;
             text-align: left;
         }
-        .mc-option:hover { 
+        .mc-option:hover, .tf-option:hover { 
             border-color: #667eea; 
             transform: translateY(-3px); 
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        .mc-option.selected { 
+        .mc-option.selected, .tf-option.selected { 
             background: #667eea; 
             color: white; 
             border-color: #667eea;
         }
+        .tf-option { font-size: 24px; font-weight: bold; text-align: center; }
         .toggle-fact { 
             background: #ff6b6b; 
             color: white; 
@@ -250,7 +250,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>🌍 Unit 6 - International Week Quiz</h1>
+        <h1>🌍 Unit 6: International Week</h1>
         <div class="progress-bar">
             <div class="progress-stats">
                 <span>Progress: <span id="progress">0</span>/30</span>
@@ -287,42 +287,43 @@
             { word: 'rock music', fact: 'American rock music shaped global pop culture from the mid-20th century onward.' }
         ];
 
+        // PERFECTLY MATCHED QUESTIONS WITH CORRECT ANSWERS
         const questionSets = {
             fillBlank: [
-                `The Chinese bride wore a beautiful ___ embroidered with dragons.`,
-                `Scottish men wear a traditional ___ with family tartan patterns.`,
-                `In Canada, people are passionate about ___ on frozen lakes.`,
-                `Japanese women wear a ___ with an obi sash for special occasions.`,
-                `___ is Japanese paper folding art that creates amazing shapes.`,
-                `Every Korean meal includes spicy fermented ___ as a side dish.`,
-                `Before Lent, Italy celebrates with ___ parades and costumes.`,
-                `In Venice, people wear decorative ___ during festivities.`,
-                `African tribes use large ___ for celebrations and communication.`,
-                `Brazilian ___ is famous during Rio Carnival celebrations.`
+                { q: `The Chinese bride wore a beautiful ___ embroidered with dragons.`, a: 'cheongsam' },
+                { q: `Scottish men wear a traditional ___ with family tartan patterns.`, a: 'kilt' },
+                { q: `In Canada, people are passionate about ___ on frozen lakes.`, a: 'ice hockey' },
+                { q: `Japanese women wear a ___ with an obi sash for special occasions.`, a: 'kimono' },
+                { q: `___ is Japanese paper folding art that creates amazing shapes.`, a: 'origami' },
+                { q: `Every Korean meal includes spicy fermented ___ as a side dish.`, a: 'kimchi' },
+                { q: `Before Lent, Italy celebrates with ___ parades and costumes.`, a: 'Carnival' },
+                { q: `In Venice, people wear decorative ___ during festivities.`, a: 'mask' },
+                { q: `African tribes use large ___ for celebrations and communication.`, a: 'African drum' },
+                { q: `Brazilian ___ is famous during Rio Carnival celebrations.`, a: 'samba' }
             ],
             multipleChoice: [
-                `What fastens a kimono? A) Obi sash B) Belt C) Ribbon D) Rope`,
-                `Origami uses what material? A) Paper B) Fabric C) Wood D) Clay`,
-                `Kimchi is from which country? A) Korea B) Japan C) China D) Thailand`,
-                `What do Scots wear with tartan patterns? A) Kilt B) Kimono C) Cheongsam D) Obi`,
-                `Venice festival uses what for anonymity? A) Mask B) Drum C) Dance D) Food`,
-                `What drives African celebrations? A) African drum B) Samba C) Hockey D) Rock music`,
-                `Brazilian carnival dance is called? A) Samba B) Belly dance C) Ballet D) Tango`,
-                `What shaped global pop culture? A) Rock music B) Ice hockey C) Origami D) Kimchi`,
-                `Graceful Middle Eastern dance? A) Belly dance B) Samba C) Kilt dance D) Mask dance`,
-                `Canada\'s national winter sport? A) Ice hockey B) Soccer C) Basketball D) Tennis`
+                { q: `What fastens a kimono?`, opts: ['Obi sash', 'Belt', 'Ribbon', 'Rope'], a: 'Obi sash' },
+                { q: `Origami uses what material?`, opts: ['Paper', 'Fabric', 'Wood', 'Clay'], a: 'Paper' },
+                { q: `Kimchi is from which country?`, opts: ['Korea', 'Japan', 'China', 'Thailand'], a: 'Korea' },
+                { q: `What do Scots wear with tartan patterns?`, opts: ['Kilt', 'Kimono', 'Cheongsam', 'Obi'], a: 'Kilt' },
+                { q: `Venice festival uses what for anonymity?`, opts: ['Mask', 'Drum', 'Dance', 'Food'], a: 'Mask' },
+                { q: `What drives African celebrations?`, opts: ['African drum', 'Samba', 'Hockey', 'Rock music'], a: 'African drum' },
+                { q: `Brazilian carnival dance is called?`, opts: ['Samba', 'Belly dance', 'Ballet', 'Tango'], a: 'Samba' },
+                { q: `What shaped global pop culture?`, opts: ['Rock music', 'Ice hockey', 'Origami', 'Kimchi'], a: 'Rock music' },
+                { q: `Graceful Middle Eastern dance?`, opts: ['Belly dance', 'Samba', 'Kilt dance', 'Mask dance'], a: 'Belly dance' },
+                { q: `Canada\'s national winter sport?`, opts: ['Ice hockey', 'Soccer', 'Basketball', 'Tennis'], a: 'Ice hockey' }
             ],
             mixed: [
-                `The ___ is China\'s elegant traditional dress for brides.`,
-                `Create a sentence using "origami": ______________________________`,
-                `Which is NOT a Korean tradition? A) Kimchi B) Kimono C) Hanbok D) Bibimbap`,
-                `Venice\'s famous ___ allows anonymity during parties.`,
-                `True/False: Ice hockey originated in Africa.`,
-                `What do you call Brazilian carnival music/dance? ___`,
-                `African drum → Used for ___`,
-                `The ___ emphasizes graceful hip movements.`,
-                `Reorder: paper / origami / transforms / into / art`,
-                `Why is kimchi important? It\'s Korea\'s ___ dish.`
+                { q: `The ___ is China\'s elegant traditional dress for brides.`, a: 'cheongsam' },
+                { q: `Create a sentence using "origami": ______________________________`, a: 'origami' },
+                { q: `Which is NOT a Korean tradition?`, opts: ['Kimchi', 'Kimono', 'Hanbok', 'Bibimbap'], a: 'Kimono' },
+                { q: `Venice\'s famous ___ allows anonymity during parties.`, a: 'mask' },
+                { q: `True/False: Ice hockey originated in Africa.`, a: 'False' },
+                { q: `What do you call Brazilian carnival music/dance? ___`, a: 'samba' },
+                { q: `African drum → Used for ___`, a: 'African drum' },
+                { q: `The ___ emphasizes graceful hip movements.`, a: 'belly dance' },
+                { q: `Reorder: paper / origami / transforms / into / art`, a: 'origami' },
+                { q: `Why is kimchi important? It\'s Korea\'s ___ dish.`, a: 'kimchi' }
             ]
         };
 
@@ -334,6 +335,7 @@
         let currentQuestionType = 'fillBlank';
         let currentFact = '';
         let factVisible = false;
+        let currentQuestionData = null;
 
         function init() {
             shuffleQuestionSet();
@@ -345,6 +347,7 @@
             const types = Object.keys(questionSets);
             currentQuestionType = types[Math.floor(Math.random() * types.length)];
             currentAnswers = questionSets[currentQuestionType];
+            // Shuffle order
             for (let i = currentAnswers.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [currentAnswers[i], currentAnswers[j]] = [currentAnswers[j], currentAnswers[i]];
@@ -367,15 +370,30 @@
 
         function showQuestion(index) {
             const container = document.getElementById('quizContainer');
-            const question = currentAnswers[index % 10];
+            currentQuestionData = currentAnswers[index % 10];
             const isMC = currentQuestionType === 'multipleChoice';
+            const isTF = currentQuestionData.q.includes('True/False');
+            
+            let inputHTML = '';
+            if (isMC) {
+                inputHTML = generateMCOptions(currentQuestionData);
+            } else if (isTF) {
+                inputHTML = `
+                    <div class="tf-options">
+                        <div class="tf-option" onclick="selectOption(this)">✅ True</div>
+                        <div class="tf-option" onclick="selectOption(this)">❌ False</div>
+                    </div>
+                `;
+            } else {
+                inputHTML = '<input type="text" id="answerInput" placeholder="Type your answer here..." autofocus>';
+            }
             
             container.innerHTML = `
                 <div class="current-question">
                     <div class="question-number">Question ${index + 1} of ${totalQuestions}</div>
-                    <div class="question-text">${question}</div>
+                    <div class="question-text">${currentQuestionData.q}</div>
                     
-                    ${isMC ? generateMCOptions(index) : '<input type="text" id="answerInput" placeholder="Type your answer here..." autofocus>'}
+                    ${inputHTML}
                     
                     <button class="toggle-fact" onclick="toggleFact()">💡 Show Fact</button>
                     <div class="detail">
@@ -390,45 +408,52 @@
             factVisible = false;
         }
 
-        function generateMCOptions(index) {
-            const mcQuestions = questionSets.multipleChoice;
-            const question = mcQuestions[index % 10];
-            const options = question.split('?')[1].trim().split(' ');
+        function generateMCOptions(qData) {
+            // Shuffle MC options
+            const shuffledOpts = [...qData.opts];
+            for (let i = shuffledOpts.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledOpts[i], shuffledOpts[j]] = [shuffledOpts[j], shuffledOpts[i]];
+            }
             return `
                 <div class="mc-options">
-                    ${options.map((opt, i) => `<div class="mc-option" onclick="selectOption(this)">${opt}</div>`).join('')}
+                    ${shuffledOpts.map(opt => `<div class="mc-option" onclick="selectOption(this)">${opt}</div>`).join('')}
                 </div>
             `;
         }
 
         function selectOption(element) {
-            document.querySelectorAll('.mc-option').forEach(el => el.classList.remove('selected'));
+            const parentClass = element.classList.contains('tf-option') ? '.tf-options' : '.mc-options';
+            document.querySelectorAll(`${parentClass} .mc-option, ${parentClass} .tf-option`).forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
         }
 
         function checkCurrentAnswer() {
             const feedbackDiv = document.getElementById('currentFeedback');
             const answerInput = document.getElementById('answerInput');
-            const selectedOption = document.querySelector('.mc-option.selected');
+            const selectedOption = document.querySelector('.mc-option.selected, .tf-option.selected');
             const userAnswer = (selectedOption ? selectedOption.textContent : (answerInput ? answerInput.value : '')).toLowerCase().trim();
             
-            const correctWord = vocabData[currentQuestion % vocabData.length].word.toLowerCase();
-            const isCorrect = userAnswer.includes(correctWord.split(' ')[0]);
+            const correctAnswer = currentQuestionData.a.toLowerCase();
+            const isTF = currentQuestionData.q.includes('True/False');
+            const userAnswerClean = isTF ? (userAnswer.includes('false') ? 'false' : 'true') : userAnswer;
+            
+            const isCorrect = userAnswerClean.includes(correctAnswer) || correctAnswer.includes(userAnswerClean);
             
             if (isCorrect) {
                 credits += 10;
-                updateBingo(correctWord);
+                updateBingo(correctAnswer);
                 feedbackDiv.innerHTML = `
                     <div class="feedback correct">
                         🎉 Perfect! +10 credits<br>
-                        <strong>Key word: ${vocabData[currentQuestion % vocabData.length].word}</strong>
+                        <strong>✅ Correct: ${currentQuestionData.a}</strong>
                     </div>
                 `;
             } else {
                 feedbackDiv.innerHTML = `
                     <div class="feedback wrong">
                         ❌ Not quite! Try again<br>
-                        <strong>Hint: ${vocabData[currentQuestion % vocabData.length].word}</strong>
+                        <strong>💡 Answer: ${currentQuestionData.a}</strong>
                     </div>
                 `;
             }
@@ -453,8 +478,9 @@
         }
 
         function updateBingo(word) {
-            if (!bingoWords.includes(word) && bingoWords.length < 9) {
-                bingoWords.push(word);
+            const cleanWord = vocabData.find(v => v.word.toLowerCase().includes(word))?.word;
+            if (cleanWord && !bingoWords.includes(cleanWord) && bingoWords.length < 9) {
+                bingoWords.push(cleanWord);
             }
         }
 
@@ -475,7 +501,7 @@
             const grid = document.getElementById('bingoGrid');
             const displayWords = vocabData.slice(0,9).map(v => v.word);
             
-            grid.innerHTML = displayWords.map((word, i) => 
+            grid.innerHTML = displayWords.map((word) => 
                 `<div class="bingo-cell ${bingoWords.includes(word) ? 'filled' : ''}" data-word="${word}">
                     ${word}
                 </div>`
