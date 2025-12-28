@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4 - World Cultures Duolingo Quiz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px;
+        }
+        .header { 
+            text-align: center; 
+            color: white; 
+            margin-bottom: 30px; 
+            width: 100%; 
+            max-width: 600px;
+        }
+        .header h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .progress-bar { 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 25px; 
+            padding: 15px 25px; 
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .progress-stats { 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 1.2em; 
+            font-weight: bold;
+        }
+        .progress-fill { 
+            background: linear-gradient(90deg, #58cc02, #7ed957); 
+            height: 10px; 
+            border-radius: 5px; 
+            transition: width 0.5s ease;
+            margin-top: 10px;
+        }
+        .current-question { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 40px; 
+            max-width: 600px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .question-number { 
+            background: #667eea; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 25px; 
+            font-size: 1.1em; 
+            font-weight: bold; 
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .question-text { 
+            font-size: 1.4em; 
+            color: #333; 
+            margin-bottom: 25px; 
+            line-height: 1.5;
+        }
+        input[type="text"] { 
+            width: 80%; 
+            max-width: 400px; 
+            padding: 15px; 
+            border: 3px solid #ddd; 
+            border-radius: 12px; 
+            font-size: 18px; 
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus { 
+            outline: none; 
+            border-color: #667eea; 
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+        .mc-options { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            max-width: 500px; 
+            margin: 0 auto;
+        }
+        .mc-option { 
+            padding: 20px; 
+            background: white; 
+            border: 3px solid #eee; 
+            border-radius: 15px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            font-size: 16px;
+            text-align: left;
+        }
+        .mc-option:hover { 
+            border-color: #667eea; 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .mc-option.selected { 
+            background: #667eea; 
+            color: white; 
+            border-color: #667eea;
+        }
+        .check-btn { 
+            background: linear-gradient(45deg, #58cc02, #7ed957); 
+            color: white; 
+            border: none; 
+            padding: 18px 40px; 
+            border-radius: 30px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin: 30px 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(88, 204, 2, 0.4);
+        }
+        .check-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(88, 204, 2, 0.6);
+        }
+        .feedback { 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin: 20px 0; 
+            font-size: 1.2em; 
+            font-weight: bold;
+        }
+        .correct { 
+            background: linear-gradient(45deg, #d4edda, #c3e6cb); 
+            color: #155724; 
+            border: 2px solid #c3e6cb; 
+            animation: correctAnim 0.6s ease;
+        }
+        .wrong { 
+            background: linear-gradient(45deg, #f8d7da, #f5c6cb); 
+            color: #721c24; 
+            border: 2px solid #f5c6cb; 
+            animation: wrongAnim 0.6s ease;
+        }
+        @keyframes correctAnim { 
+            0% { transform: scale(0.95); opacity: 0; }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes wrongAnim { 
+            0% { transform: scale(0.95); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .detail { 
+            background: rgba(255,255,255,0.95); 
+            border-left: 6px solid #667eea; 
+            padding: 20px; 
+            margin: 25px 0; 
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .label { 
+            font-weight: bold; 
+            color: #667eea; 
+            text-transform: uppercase; 
+            font-size: 1em; 
+            display: block; 
+            margin-bottom: 8px;
+        }
+        .bingo-board { 
+            background: white; 
+            border-radius: 25px; 
+            padding: 30px; 
+            max-width: 450px; 
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .bingo-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; 
+            margin-top: 20px;
+        }
+        .bingo-cell { 
+            aspect-ratio: 1; 
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0); 
+            border: 4px solid #ddd; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+            font-size: 12px; 
+            transition: all 0.4s;
+            text-align: center;
+            padding: 8px;
+        }
+        .bingo-cell.filled { 
+            background: linear-gradient(45deg, #58cc02, #7ed957); 
+            color: white; 
+            border-color: #58cc02;
+            animation: bingoFill 0.6s ease;
+            transform: scale(1.05);
+        }
+        @keyframes bingoFill { 
+            0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            100% { transform: scale(1.05) rotate(0deg); opacity: 1; }
+        }
+        .level-complete { 
+            background: linear-gradient(45deg, #ffd700, #ffed4e); 
+            color: #b8860b; 
+            padding: 25px; 
+            border-radius: 20px; 
+            text-align: center; 
+            margin: 20px 0;
+            font-size: 1.3em;
+            animation: celebrate 1s ease infinite alternate;
+        }
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Unit 4: World Cultures</h1>
+        <div class="progress-bar">
+            <div class="progress-stats">
+                <span>Progress: <span id="progress">0</span>/30</span>
+                <span>Credits: <span id="credits">0</span></span>
+                <span>Bingo: <span id="bingoCount">0</span>/9</span>
+            </div>
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="bingo-board" id="bingoBoard">
+        <h3 style="text-align: center; margin-bottom: 20px; color: #333; font-size: 1.5em;">🏆 Vocabulary BINGO Complete!</h3>
+        <div class="bingo-grid" id="bingoGrid"></div>
+        <div style="text-align: center; margin-top: 25px;">
+            <button class="check-btn" onclick="restartQuiz()">🔄 New Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const vocabData = [
+            { word: 'cheongsam', fact: 'The bride wore a beautiful silk cheongsam embroidered with golden dragons.' },
+            { word: 'kilt', fact: 'A traditional Scottish kilt displays unique tartan patterns unique to different clans.' },
+            { word: 'ice hockey', fact: 'Ice hockey is considered Canada\'s national sport and a national passion.' },
+            { word: 'kimono', fact: 'A traditional kimono is fastened with a decorative obi sash around the waist.' },
+            { word: 'origami', fact: 'Origami transforms a single sheet of paper into beautiful artistic designs.' },
+            { word: 'kimchi', fact: 'Kimchi is Korea\'s national fermented dish served at almost every meal.' },
+            { word: 'Carnival', fact: 'Italy\'s Carnival includes historic parades and festivities before the Lenten season.' },
+            { word: 'mask', fact: 'A decorated mask allows anonymity during Venice\'s famous festivities.' },
+            { word: 'African drum', fact: 'An African drum drives communal celebrations and dances across many African cultures.' },
+            { word: 'samba', fact: 'Samba evolved from African traditions into modern urban carnival celebrations.' },
+            { word: 'belly dance', fact: 'Belly dance emphasizes graceful body movements and cultural expression.' },
+            { word: 'rock music', fact: 'American rock music shaped global pop culture from the mid-20th century onward.' }
+        ];
+
+        const questionSets = {
+            fillBlank: [
+                `The Chinese bride wore a beautiful ___ embroidered with dragons.`,
+                `Scottish men wear a traditional ___ with family tartan patterns.`,
+                `In Canada, people are passionate about ___ on frozen lakes.`,
+                `Japanese women wear a ___ with an obi sash for special occasions.`,
+                `___ is Japanese paper folding art that creates amazing shapes.`,
+                `Every Korean meal includes spicy fermented ___ as a side dish.`,
+                `Before Lent, Italy celebrates with ___ parades and costumes.`,
+                `In Venice, people wear decorative ___ during festivities.`,
+                `African tribes use large ___ for celebrations and communication.`,
+                `Brazilian ___ is famous during Rio Carnival celebrations.`
+            ],
+            multipleChoice: [
+                `What fastens a kimono? A) Belt B) Obi sash C) Ribbon D) Rope`,
+                `Origami uses what material? A) Fabric B) Wood C) Paper D) Clay`,
+                `Kimchi is from which country? A) Japan B) China C) Korea D) Thailand`,
+                `What do Scots wear with tartan patterns? A) Kimono B) Kilt C) Cheongsam D) Obi`,
+                `Venice festival uses what for anonymity? A) Drum B) Mask C) Dance D) Food`,
+                `What drives African celebrations? A) Samba B) Drum C) Hockey D) Rock music`,
+                `Brazilian carnival dance is called? A) Belly dance B) Samba C) Ballet D) Tango`,
+                `What shaped global pop culture? A) Ice hockey B) Rock music C) Origami D) Kimchi`,
+                `Graceful Middle Eastern dance? A) Samba B) Belly dance C) Kilt dance D) Mask dance`,
+                `Canada\'s national winter sport? A) Soccer B) Ice hockey C) Basketball D) Tennis`
+            ],
+            mixed: [
+                `The ___ (cheongsam/kilt) is China\'s elegant traditional dress for brides.`,
+                `Create a sentence using "origami": ______________________________`,
+                `Which is NOT a Korean tradition? A) Kimchi B) Kimono C) Hanbok D) Bibimbap`,
+                `Venice\'s famous ___ (mask/Carnival) allows anonymity during parties.`,
+                `True/False: Ice hockey originated in Africa.`,
+                `What do you call Brazilian carnival music/dance? ___`,
+                `African drum → Used for ___ (dancing/communication/decorating)`,
+                `The ___ (belly dance/rock music) emphasizes graceful hip movements.`,
+                `Reorder: paper / origami / transforms / into / art`,
+                `Why is kimchi important? It\'s Korea\'s ___ (national dish/staple food).`
+            ]
+        };
+
+        let currentQuestion = 0;
+        let totalQuestions = 30;
+        let credits = 0;
+        let bingoWords = [];
+        let currentAnswers = [];
+        let currentQuestionType = 'fillBlank';
+
+        function init() {
+            shuffleQuestionSet();
+            showQuestion(currentQuestion);
+            updateProgress();
+        }
+
+        function shuffleQuestionSet() {
+            const types = Object.keys(questionSets);
+            currentQuestionType = types[Math.floor(Math.random() * types.length)];
+            currentAnswers = questionSets[currentQuestionType];
+            // Shuffle for variety
+            for (let i = currentAnswers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentAnswers[i], currentAnswers[j]] = [currentAnswers[j], currentAnswers[i]];
+            }
+        }
+
+        function showQuestion(index) {
+            const container = document.getElementById('quizContainer');
+            const question = currentAnswers[index % 10];
+            const isMC = currentQuestionType === 'multipleChoice' || question.includes('A)');
+            
+            container.innerHTML = `
+                <div class="current-question">
+                    <div class="question-number">Question ${index + 1} of ${totalQuestions}</div>
+                    <div class="question-text">${question}</div>
+                    
+                    ${isMC ? generateMCOptions(question) : '<input type="text" id="answerInput" placeholder="Type your answer here..." autofocus>'}
+                    
+                    <div class="detail">
+                        <span class="label">💡 Extra Fact:</span>
+                        ${vocabData[Math.floor(Math.random() * vocabData.length)].fact}
+                    </div>
+                    
+                    <button class="check-btn" onclick="checkCurrentAnswer()">✅ Check Answer</button>
+                    <div id="currentFeedback"></div>
+                </div>
+            `;
+        }
+
+        function generateMCOptions(question) {
+            const options = question.split('?')[1].trim().split(' ');
+            return `
+                <div class="mc-options">
+                    ${options.map(opt => `<div class="mc-option" onclick="selectOption(this)">${opt}</div>`).join('')}
+                </div>
+            `;
+        }
+
+        function selectOption(element) {
+            document.querySelectorAll('.mc-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function checkCurrentAnswer() {
+            const feedbackDiv = document.getElementById('currentFeedback');
+            const answerInput = document.getElementById('answerInput');
+            const selectedOption = document.querySelector('.mc-option.selected');
+            const userAnswer = (selectedOption ? selectedOption.textContent : (answerInput ? answerInput.value : '')).toLowerCase().trim();
+            
+            const correctWord = vocabData[currentQuestion % vocabData.length].word.toLowerCase();
+            const isCorrect = userAnswer.includes(correctWord.split(' ')[0]);
+            
+            if (isCorrect) {
+                credits += 10;
+                updateBingo(correctWord);
+                feedbackDiv.innerHTML = `
+                    <div class="feedback correct">
+                        🎉 Perfect! +10 credits<br>
+                        <strong>Key word: ${vocabData[currentQuestion % vocabData.length].word}</strong>
+                    </div>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `
+                    <div class="feedback wrong">
+                        ❌ Not quite! Try again<br>
+                        <strong>Hint: ${vocabData[currentQuestion % vocabData.length].word}</strong>
+                    </div>
+                `;
+            }
+            
+            updateProgress();
+            
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < totalQuestions) {
+                    showQuestion(currentQuestion);
+                } else {
+                    showCompletion();
+                }
+            }, 2000);
+        }
+
+        function updateProgress() {
+            document.getElementById('progress').textContent = currentQuestion;
+            document.getElementById('credits').textContent = credits;
+            document.getElementById('bingoCount').textContent = bingoWords.length;
+            document.getElementById('progressFill').style.width = `${(currentQuestion / totalQuestions) * 100}%`;
+        }
+
+        function updateBingo(word) {
+            if (!bingoWords.includes(word) && bingoWords.length < 9) {
+                bingoWords.push(word);
+            }
+        }
+
+        function showCompletion() {
+            document.getElementById('quizContainer').innerHTML = `
+                <div class="current-question level-complete">
+                    <h2>🎊 Quiz Complete! 🎊</h2>
+                    <p><strong>Total Credits: ${credits}</strong></p>
+                    <p>Questions Completed: ${totalQuestions}/${totalQuestions}</p>
+                    <p>Bingo Words: ${bingoWords.length}/9</p>
+                    <button class="check-btn" onclick="showBingoBoard()" style="font-size: 18px; padding: 15px 30px;">🏆 View BINGO Board</button>
+                </div>
+            `;
+        }
+
+        function showBingoBoard() {
+            document.getElementById('bingoBoard').style.display = 'block';
+            const grid = document.getElementById('bingoGrid');
+            const displayWords = vocabData.slice(0,9).map(v => v.word);
+            
+            grid.innerHTML = displayWords.map((word, i) => 
+                `<div class="bingo-cell ${bingoWords.includes(word) ? 'filled' : ''}" data-word="${word}">
+                    ${word}
+                </div>`
+            ).join('');
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            credits = 0;
+            bingoWords = [];
+            document.getElementById('bingoBoard').style.display = 'none';
+            init();
+        }
+
+        init();
+    </script>
+</body>
+</html>
