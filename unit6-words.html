@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6 - International Week | Duolingo Style</title>
+    <style>
+        :root {
+            --duo-green: #58CC02;
+            --duo-green-dark: #4AA300;
+            --duo-blue: #5CBAF0;
+            --duo-orange: #FFC400;
+            --duo-purple: #A46BF5;
+            --bg-light: #FAFAFB;
+            --card-bg: #FFFFFF;
+            --text-dark: #252A31;
+            --text-medium: #686F7A;
+            --border-light: #E5E7EB;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --radius: 12px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+        .header {
+            background: var(--duo-green);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+        .header::before {
+            content: '🌍';
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        .section {
+            padding: 30px 25px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            color: var(--duo-green);
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .vocab-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .vocab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--duo-green), var(--duo-orange));
+        }
+        .vocab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--duo-green);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .country-flag {
+            width: 48px;
+            height: 48px;
+            background: var(--duo-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .card-subtitle {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            margin-top: 2px;
+        }
+        .image-container {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #F0F4F8, #E2E8F0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed var(--border-light);
+            font-size: 4em;
+            color: var(--text-medium);
+        }
+        .definition {
+            background: #F8FAFC;
+            padding: 16px;
+            border-left: 4px solid var(--duo-green);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .def-title {
+            font-weight: 600;
+            color: var(--duo-green);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .example {
+            background: #F1F5F9;
+            padding: 16px;
+            border-left: 4px solid var(--duo-purple);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        .ex-title {
+            font-weight: 600;
+            color: var(--duo-purple);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .fill-section {
+            background: linear-gradient(135deg, #FFF7ED, #FFE8CC);
+        }
+        .fill-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .fill-card {
+            background: white;
+            border: 2px solid var(--duo-orange);
+            border-radius: var(--radius);
+            padding: 25px;
+            position: relative;
+        }
+        .fill-card::before {
+            content: '🧠';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--duo-orange);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+        .fill-card .card-header {
+            margin-bottom: 20px;
+        }
+        .blank-input {
+            display: inline-block;
+            border-bottom: 3px solid var(--duo-orange);
+            min-width: 100px;
+            padding: 4px 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            background: none;
+            border: none;
+            text-align: center;
+            margin: 0 4px;
+        }
+        .blank-input:focus {
+            outline: none;
+            border-bottom-color: var(--duo-green);
+        }
+        .print-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 14px 40px;
+            background: var(--duo-green);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(88, 204, 2, 0.3);
+        }
+        .print-btn:hover {
+            background: var(--duo-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 204, 2, 0.4);
+        }
+        @media (max-width: 768px) {
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .section {
+                padding: 20px 15px;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+            .vocab-card, .fill-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>國際周單元 6</h1>
+            <p>探索世界文化詞彙與傳統</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📚 詞彙學習</h2>
+            <div class="vocab-grid">
+                <!-- CHINA Cheongsam -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇨🇳</div>
+                        <div>
+                            <div class="card-title">a cheongsam</div>
+                            <div class="card-subtitle">中國</div>
+                        </div>
+                    </div>
+                    <div class="image-container">👗</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>一種貼身的傳統中式禮服，特高領和側開衩，常穿於特別場合。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>She looked elegant in her red <strong>cheongsam</strong> at the wedding celebration.</p>
+                    </div>
+                </div>
+
+                <!-- SCOTLAND Kilt -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+                        <div>
+                            <div class="card-title">a kilt</div>
+                            <div class="card-subtitle">蘇格蘭</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🧡</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>膝蓋長度的褶裙，傳統上由蘇格蘭男性穿着，飾有格紋圖案。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>At the Highland Games, the dancers wore colorful <strong>kilts</strong> and performed traditional dances.</p>
+                    </div>
+                </div>
+
+                <!-- CANADA Ice Hockey -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇨🇦</div>
+                        <div>
+                            <div class="card-title">an ice hockey</div>
+                            <div class="card-subtitle">加拿大</div>
+                        </div>
+                    </div>
+                    <div class="image-container">⛸️</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>在冰上使用球棒和 puck 的快節奏團隊運動，是加拿大文化核心。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Canada's <strong>ice hockey</strong> team won the Olympic gold medal with exceptional teamwork.</p>
+                    </div>
+                </div>
+
+                <!-- JAPAN Kimono -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇯🇵</div>
+                        <div>
+                            <div class="card-title">a kimono</div>
+                            <div class="card-subtitle">日本</div>
+                        </div>
+                    </div>
+                    <div class="image-container">👘</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>傳統日本服飾，方形袖子，前包裹式，配有 obi 腰帶。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>She wore an elegant silk <strong>kimono</strong> during the cherry blossom festival.</p>
+                    </div>
+                </div>
+
+                <!-- JAPAN Origami -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇯🇵</div>
+                        <div>
+                            <div class="card-title">an origami</div>
+                            <div class="card-subtitle">日本</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🕊️</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>日本摺紙藝術，摺出鶴、花、動物等複雜形狀。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Children learn <strong>origami</strong> in school to make paper cranes symbolizing peace and longevity.</p>
+                    </div>
+                </div>
+
+                <!-- KOREA Kimchi -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇰🇷</div>
+                        <div>
+                            <div class="card-title">a kimchi</div>
+                            <div class="card-subtitle">韓國</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🌶️</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>用蔬菜（通常高麗菜）、辣椒等發酵而成的韓國辣味菜餚。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Every Korean meal includes <strong>kimchi</strong> for its tangy, spicy flavor and health benefits.</p>
+                    </div>
+                </div>
+
+                <!-- ITALY Carnival -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇮🇹</div>
+                        <div>
+                            <div class="card-title">a carnival</div>
+                            <div class="card-subtitle">意大利</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🎭</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>嘉年華慶典，包括遊行、化妝舞會及華麗服裝，威尼斯最著名。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Venice's <strong>carnival</strong> draws thousands of visitors with colorful floats and mysterious masked balls.</p>
+                    </div>
+                </div>
+
+                <!-- ITALY Venetian Mask -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇮🇹</div>
+                        <div>
+                            <div class="card-title">a Venetian mask</div>
+                            <div class="card-subtitle">意大利</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🎭</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>嘉年華期間戴的華麗裝飾面具，用天鵝絨、金屬及複雜設計製作。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>She donned an ornate <strong>Venetian mask</strong> for the mysterious carnival ball.</p>
+                    </div>
+                </div>
+
+                <!-- AFRICA African Drum -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇦🇫</div>
+                        <div>
+                            <div class="card-title">an African drum</div>
+                            <div class="card-subtitle">非洲</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🥁</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>非洲音樂中的打擊樂器，包括 djembe、talking drums 和框架鼓等多種。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>The village celebration featured energetic rhythmic beats from traditional <strong>African drums</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- BRAZIL Samba -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇧🇷</div>
+                        <div>
+                            <div class="card-title">a samba</div>
+                            <div class="card-subtitle">巴西</div>
+                        </div>
+                    </div>
+                    <div class="image-container">💃</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>源自巴伊亞的巴西節奏與舞蹈，切分音節奏及臀部動作，是嘉年華核心。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Rio's <strong>carnival</strong> pulses with vibrant samba music and energetic dancers.</p>
+                    </div>
+                </div>
+
+                <!-- TURKEY Belly Dance -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇹🇷</div>
+                        <div>
+                            <div class="card-title">a belly dance</div>
+                            <div class="card-subtitle">土耳其</div>
+                        </div>
+                    </div>
+                    <div class="image-container">💃</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>中東舞蹈形式，強調臀部、腹部及軀幹的獨立動作，起源於土耳其及周邊地區。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p>Performers showcase fluid <strong>belly dance</strong> movements with shimmies and undulations.</p>
+                    </div>
+                </div>
+
+                <!-- USA Rock Music -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇺🇸</div>
+                        <div>
+                            <div class="card-title">a rock music</div>
+                            <div class="card-subtitle">美國</div>
+                        </div>
+                    </div>
+                    <div class="image-container">🎸</div>
+                    <div class="definition">
+                        <div class="def-title">定義</div>
+                        <p>吉他主導的音樂類型，融合藍調、鄉村及節奏藍調元素，起源於美國。</p>
+                    </div>
+                    <div class="example">
+                        <div class="ex-title">例句</div>
+                        <p><strong>Rock music</strong> exploded globally in the 1950s with legendary artists like Elvis Presley.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section fill-section">
+            <h2 class="section-title">✏️ 填空練習</h2>
+            <div class="fill-grid">
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇨🇳</div>
+                        <div>
+                            <div class="card-title">Cheongsam</div>
+                            <div class="card-subtitle">中國</div>
+                        </div>
+                    </div>
+                    <p>The bride wore a beautiful silk <input type="text" class="blank-input" placeholder="____"> embroidered with golden dragons.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+                        <div>
+                            <div class="card-title">Kilt</div>
+                            <div class="card-subtitle">蘇格蘭</div>
+                        </div>
+                    </div>
+                    <p>A traditional Scottish <input type="text" class="blank-input" placeholder="____"> displays unique tartan patterns unique to different clans.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇨🇦</div>
+                        <div>
+                            <div class="card-title">Ice Hockey</div>
+                            <div class="card-subtitle">加拿大</div>
+                        </div>
+                    </div>
+                    <p><input type="text" class="blank-input" placeholder="____"> is considered Canada's national sport and passion.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇯🇵</div>
+                        <div>
+                            <div class="card-title">Kimono</div>
+                            <div class="card-subtitle">日本</div>
+                        </div>
+                    </div>
+                    <p>A traditional <input type="text" class="blank-input" placeholder="____"> is fastened with a decorative obi sash around the waist.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇯🇵</div>
+                        <div>
+                            <div class="card-title">Origami</div>
+                            <div class="card-subtitle">日本</div>
+                        </div>
+                    </div>
+                    <p><input type="text" class="blank-input" placeholder="____"> transforms a single sheet of paper into beautiful artistic designs.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇰🇷</div>
+                        <div>
+                            <div class="card-title">Kimchi</div>
+                            <div class="card-subtitle">韓國</div>
+                        </div>
+                    </div>
+                    <p><input type="text" class="blank-input" placeholder="____"> is Korea's national fermented dish served at almost every meal.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇮🇹</div>
+                        <div>
+                            <div class="card-title">Carnival</div>
+                            <div class="card-subtitle">意大利</div>
+                        </div>
+                    </div>
+                    <p>Italy's <input type="text" class="blank-input" placeholder="____"> includes historic parades and festivities before the Lenten season.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇮🇹</div>
+                        <div>
+                            <div class="card-title">Venetian Mask</div>
+                            <div class="card-subtitle">意大利</div>
+                        </div>
+                    </div>
+                    <p>A decorated <input type="text" class="blank-input" placeholder="____"> mask allows anonymity during Venice's famous festivities.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇦🇫</div>
+                        <div>
+                            <div class="card-title">African Drum</div>
+                            <div class="card-subtitle">非洲</div>
+                        </div>
+                    </div>
+                    <p>An <input type="text" class="blank-input" placeholder="____"> drum drives communal celebrations and dances across many African cultures.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇧🇷</div>
+                        <div>
+                            <div class="card-title">Samba</div>
+                            <div class="card-subtitle">巴西</div>
+                        </div>
+                    </div>
+                    <p><input type="text" class="blank-input" placeholder="____"> evolved from African traditions into urban carnival celebrations.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇹🇷</div>
+                        <div>
+                            <div class="card-title">Belly Dance</div>
+                            <div class="card-subtitle">土耳其</div>
+                        </div>
+                    </div>
+                    <p><input type="text" class="blank-input" placeholder="____"> dance emphasizes graceful body movements and cultural expression.</p>
+                </div>
+
+                <div class="fill-card">
+                    <div class="card-header">
+                        <div class="country-flag">🇺🇸</div>
+                        <div>
+                            <div class="card-title">Rock Music</div>
+                            <div class="card-subtitle">美國</div>
+                        </div>
+                    </div>
+                    <p>American <input type="text" class="blank-input" placeholder="____"> music shaped global pop culture from the mid-20th century onward.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">🖨️ 列印此頁</button>
+    </div>
+</body>
+</html>
