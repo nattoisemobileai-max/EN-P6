@@ -3,541 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Going Green</title>
+    <title>Unit 6: Save Our World - Quiz</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2d3436;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             overflow: hidden;
         }
+
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
-        h1 {
-            font-size: 2.5em;
+
+        header h1 {
+            font-size: 2.2em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        .content {
-            padding: 40px;
-        }
-        .vocabulary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        .vocab-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e1e8ed;
-            position: relative;
-            overflow: hidden;
-        }
-        .vocab-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
-        }
-        .vocab-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        .term {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        .image-container {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .vocab-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .vocab-card:hover img {
-            transform: scale(1.05);
-        }
-        .detail {
-            margin-bottom: 12px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            border-radius: 5px;
-        }
-        .label {
-            font-weight: bold;
-            color: #e74c3c;
-            text-transform: uppercase;
-            font-size: 0.85em;
             letter-spacing: 1px;
         }
-        .quiz-section {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            padding: 40px;
+
+        .content { padding: 40px; }
+
+        /* Vocabulary Section */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .vocab-card {
+            background: #f9f9f9;
+            padding: 20px;
             border-radius: 15px;
-            margin-top: 50px;
-            text-align: center;
+            border-left: 5px solid #4caf50;
+            transition: transform 0.2s;
         }
+
+        .vocab-card:hover { transform: translateY(-5px); }
+        .vocab-card h3 { color: #2e7d32; margin-bottom: 5px; }
+        .vocab-card p { font-size: 0.9em; color: #636e72; }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+        }
+
         .quiz-title {
-            font-size: 2em;
-            color: #2c3e50;
+            text-align: center;
+            color: #2d3436;
             margin-bottom: 30px;
+            font-size: 1.8em;
         }
-        .quiz-question {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: left;
-        }
+
         .question-text {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #34495e;
-            margin-bottom: 20px;
+            font-size: 1.25em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #2d3436;
         }
-        .options {
-            list-style: none;
-        }
+
+        .options { list-style: none; }
+
         .options li {
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            background: #f1f2f6;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
             border: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
-        .options li:hover {
-            background: #3498db;
-            color: white;
-            border-color: #2980b9;
+
+        .options li:hover:not(.locked) {
+            background: #dfe4ea;
+            border-color: #2e7d32;
         }
+
         .options li.correct {
-            background: #27ae60;
-            color: white;
-            border-color: #229954;
+            background: #c8e6c9 !important;
+            border-color: #4caf50 !important;
+            color: #1b5e20;
         }
+
         .options li.incorrect {
-            background: #e74c3c;
-            color: white;
-            border-color: #c0392b;
+            background: #ffcdd2 !important;
+            border-color: #f44336 !important;
+            color: #b71c1c;
         }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            background: #fff9c4;
+            border-left: 4px solid #fbc02d;
+            font-size: 0.95em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #2e7d32;
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.1em;
-            border-radius: 25px;
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            transition: 0.3s;
         }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .score {
-            font-size: 1.5em;
+
+        button:hover { background: #1b5e20; opacity: 0.9; }
+        button:disabled { background: #b2dfdb; cursor: not-allowed; }
+
+        .score-display {
             font-weight: bold;
-            margin-top: 20px;
-            color: #27ae60;
+            color: #2e7d32;
         }
-        @media (max-width: 768px) {
-            .vocabulary-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .content {
-                padding: 20px;
-            }
+
+        @media (max-width: 600px) {
+            .content { padding: 20px; }
+            header h1 { font-size: 1.6em; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Unit 1# Going Green</h1>
-            <p class="subtitle">Energy Conservation, Temperature Control</p>
-        </header>
 
-        <div class="content">
-            <div class="vocabulary-grid">
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/cheongsam.png" alt="Red Cheongsam dress" onerror="this.src='https://via.placeholder.com/350x200/FF6B6B/FFFFFF?text=Cheongsam'">
-                    </div>
-                    <div class="term">a cheongsam</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A form-fitting traditional Chinese dress with a high neck and side slits, often worn for special occasions.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        She looked elegant in her red <b>cheongsam</b> at the wedding celebration.
-                    </div>
-                </div>
+<div class="container">
+    <header>
+        <h1>Unit 6: Environmental Protection</h1>
+        <p>Learn how to save energy and reduce waste</p>
+    </header>
 
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/kilt.png" alt="Scottish kilt" onerror="this.src='https://via.placeholder.com/350x200/4ECDC4/FFFFFF?text=Kilt'">
-                    </div>
-                    <div class="term">a kilt</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A knee-length pleated skirt, traditionally worn by men in Scotland, featuring tartan patterns.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        At the Highland Games, the dancers wore colorful <b>kilts</b> and performed traditional dances.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/ice_hockey.png" alt="Ice hockey game" onerror="this.src='https://via.placeholder.com/350x200/45B7D1/FFFFFF?text=Ice+Hockey'">
-                    </div>
-                    <div class="term">an ice hockey</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A fast-paced team sport played on ice with sticks and a puck, central to Canadian culture.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Canada's <b>ice hockey</b> team won the Olympic gold medal with exceptional teamwork.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/kimono.png" alt="Japanese kimono" onerror="this.src='https://via.placeholder.com/350x200/F9CA24/000000?text=Kimono'">
-                    </div>
-                    <div class="term">a kimono</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A traditional Japanese garment with square sleeves, wrapped front, and an obi sash belt.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        She wore an elegant silk <b>kimono</b> during the cherry blossom festival.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/origami.png" alt="Origami crane" onerror="this.src='https://via.placeholder.com/350x200/FF6B6B/FFFFFF?text=Origami'">
-                    </div>
-                    <div class="term">Origami</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        The Japanese art of paper folding to create intricate shapes like cranes, flowers, and animals.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Children learn <b>origami</b> in school to make paper cranes symbolizing peace and longevity.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/Kimchi.png" alt="Korean kimchi" onerror="this.src='https://via.placeholder.com/350x200/4ECDC4/FFFFFF?text=Kimchi'">
-                    </div>
-                    <div class="term">kimchi</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A spicy fermented Korean dish made from vegetables, typically cabbage, with chili peppers and seasonings.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Every Korean meal includes <b>kimchi</b> for its tangy, spicy flavor and health benefits.
-                    </div>
-                    
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/carnival.png" alt="Venice Carnival" onerror="this.src='https://via.placeholder.com/350x200/45B7D1/FFFFFF?text=Carnival'">
-                    </div>
-                    <div class="term">Carnival</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A festive celebration featuring parades, masquerades, and elaborate costumes, especially famous in Venice.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Venice's <b>carnival</b> draws thousands of visitors with colorful floats and mysterious masked balls.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/Venetian_mask.png" alt="Venetian mask" onerror="this.src='https://via.placeholder.com/350x200/F9CA24/000000?text=Venetian+Mask'">
-                    </div>
-                    <div class="term">Venetian Mask</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        An ornate, decorative disguise worn during Carnival, traditionally made with velvet, gold, and intricate designs.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        She donned an ornate <b>Venetian mask</b> for the mysterious carnival ball.
-                    </div>
-                    
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/africian_drum.png" alt="African drums" onerror="this.src='https://via.placeholder.com/350x200/FF6B6B/FFFFFF?text=African+Drums'">
-                    </div>
-                    <div class="term">an African Drum</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A percussion instrument used in African music, including varieties like djembe, talking drums, and frame drums.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        The village celebration featured energetic rhythmic beats from traditional <b>African drums</b>.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                            <img src="images/samba.png" alt="Samba dancers" onerror="this.src='https://via.placeholder.com/350x200/4ECDC4/FFFFFF?text=Samba'">
-                    </div>
-                    <div class="term">Samba</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A Brazilian rhythm and dance originating in Bahia, featuring syncopated beats and hip movements, central to carnival.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Rio's carnival pulses with vibrant <b>samba</b> music and energetic dancers.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/belly_dance.png" alt="Belly dance" onerror="this.src='https://via.placeholder.com/350x200/45B7D1/FFFFFF?text=Belly+Dance'">
-                    </div>
-                    <div class="term">belly Dance</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A Middle Eastern dance form featuring isolated movements of the hips, belly, and torso, with origins in Turkey and surrounding regions.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        Performers showcase fluid <b>belly dance</b> movements with shimmies and undulations.
-                    </div>
-                   
-                </div>
-
-                <div class="vocab-card">
-                    <div class="image-container">
-                        <img src="images/rock_musics.png" alt="Rock concert" onerror="this.src='https://via.placeholder.com/350x200/F9CA24/000000?text=Rock+Music'">
-                    </div>
-                    <div class="term">rock Music</div>
-                    <div class="detail">
-                        <span class="label">Definition:</span>
-                        A guitar-driven music genre originating in the USA, blending blues, country, and rhythm & blues elements.
-                    </div>
-                    <div class="detail">
-                        <span class="label">Example:</span>
-                        <b>Rock music</b> exploded globally in the 1950s with legendary artists like Elvis Presley.
-                    </div>
-                   
-                </div>
+    <div class="content">
+        <!-- Vocabulary List -->
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <h3>Energy Saving</h3>
+                <p>Using energy-efficient bulbs and turning off lights helps the planet.</p>
             </div>
+            <div class="vocab-card">
+                <h3>Reducing Waste</h3>
+                <p>Recycling paper, cans, and plastic bottles reduces our rubbish.</p>
+            </div>
+            <div class="vocab-card">
+                <h3>Reusing</h3>
+                <p>Reuse plastic bags to lower environmental impact.</p>
+            </div>
+        </div>
 
-            <div class="quiz-section" id="quiz">
-                <h2 class="quiz-title">Test Your Knowledge!</h2>
-                <div id="quiz-container">
-                    <div class="quiz-question" id="current-question">
-                        <div class="question-text" id="question-text"></div>
-                        <ul class="options" id="options-list"></ul>
-                    </div>
-                    <button onclick="checkAnswer()">Submit Answer</button>
-                    <div class="score" id="score" style="display: none;"></div>
-                    <button onclick="nextQuestion()" id="next-btn" style="display: none;">Next Question</button>
-                    <button onclick="restartQuiz()" id="restart-btn" style="display: none;">Restart Quiz</button>
+        <!-- Quiz Container -->
+        <div class="quiz-section" id="quiz">
+            <h2 class="quiz-title">Interactive Quiz</h2>
+            <div id="quiz-container">
+                <div class="question-text" id="question-text">Loading question...</div>
+                <ul class="options" id="options-list"></ul>
+                <div class="feedback" id="feedback"></div>
+                
+                <div class="controls">
+                    <div class="score-display" id="progress">Question 1 of 6</div>
+                    <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const quizData = [
-            {
-                question: "What is a cheongsam?",
-                options: ["Scottish skirt", "Chinese dress", "Japanese garment", "Brazilian dance"],
-                correct: 1,
-                explanation: "Cheongsam (Qipao) is a traditional Chinese dress with high neck and side slits."
-            },
-            {
-                question: "Which country is famous for kilts?",
-                options: ["Japan", "Scotland", "Brazil", "Korea"],
-                correct: 1,
-                explanation: "Kilts are traditional Scottish garments featuring tartan patterns."
-            },
-            {
-                question: "What is Canada's national sport?",
-                options: ["Soccer", "Ice Hockey", "Baseball", "Basketball"],
-                correct: 1,
-                explanation: "Ice hockey is considered Canada's national sport and passion."
-            },
-            {
-                question: "What fastens a traditional kimono?",
-                options: ["Buttons", "Zipper", "Obi sash", "Velcro"],
-                correct: 2,
-                explanation: "A kimono is fastened with a decorative obi sash around the waist."
-            },
-            {
-                question: "What does origami symbolize?",
-                options: ["War", "Peace and longevity", "Cooking", "Music"],
-                correct: 1,
-                explanation: "Paper cranes in origami symbolize peace and longevity."
-            },
-            {
-                question: "What is kimchi?",
-                options: ["Japanese soup", "Korean fermented dish", "Italian pasta", "African drum"],
-                correct: 1,
-                explanation: "Kimchi is Korea's national fermented dish served at almost every meal."
+<script>
+    // Data generated from user images
+    const quizData = [
+        {
+            "question": "What should we use at home to save energy?",
+            "options": ["Old light bulbs", "Energy-efficient bulbs", "Brightest bulbs", "Large bulbs"],
+            "correct": 1,
+            "explanation": "Energy-efficient bulbs use less electricity and last longer."
+        },
+        {
+            "question": "What should you do before you leave home?",
+            "options": ["Turn the lights on", "Leave the door open", "Turn the lights off", "Turn on the TV"],
+            "correct": 2,
+            "explanation": "Turning off lights is a simple way to prevent wasting power."
+        },
+        {
+            "question": "Why would someone want to turn the air conditioner down?",
+            "options": ["They feel hot", "They feel cold", "It is too quiet", "They are leaving"],
+            "correct": 1,
+            "explanation": "If you feel cold, turning the AC down (higher temperature) is the right action."
+        },
+        {
+            "question": "What does Rita encourage her classmates to do?",
+            "options": ["Buy new bags", "Throw away plastic", "Reuse plastic bags", "Use paper bags"],
+            "correct": 2,
+            "explanation": "Reusing plastic bags prevents them from ending up in landfills."
+        },
+        {
+            "question": "How can we reduce waste with plastic bottles?",
+            "options": ["Throwing them away", "Recycling them", "Burning them", "Buying more"],
+            "correct": 1,
+            "explanation": "Recycling allows old bottles to be made into new products."
+        },
+        {
+            "question": "Where did the speaker help pick up rubbish?",
+            "options": ["In the school", "In the country park", "At the beach", "In the street"],
+            "correct": 1,
+            "explanation": "Picking up rubbish in country parks helps keep nature clean."
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+        const q = quizData[currentQuestionIndex];
+        const questionText = document.getElementById('question-text');
+        const optionsList = document.getElementById('options-list');
+        const feedback = document.getElementById('feedback');
+        const progress = document.getElementById('progress');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Reset UI
+        questionText.textContent = q.question;
+        optionsList.innerHTML = '';
+        feedback.style.display = 'none';
+        nextBtn.style.display = 'none';
+        progress.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+        answered = false;
+
+        // Load Options
+        q.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.textContent = option;
+            li.onclick = () => selectOption(index);
+            optionsList.appendChild(li);
+        });
+    }
+
+    function selectOption(selectedIndex) {
+        if (answered) return;
+        answered = true;
+
+        const q = quizData[currentQuestionIndex];
+        const options = document.querySelectorAll('#options-list li');
+        const feedback = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+
+        options.forEach((option, index) => {
+            option.classList.add('locked');
+            if (index === q.correct) {
+                option.classList.add('correct');
+            } else if (index === selectedIndex) {
+                option.classList.add('incorrect');
             }
-        ];
+        });
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let answered = false;
-
-        function loadQuestion() {
-            const q = quizData[currentQuestionIndex];
-            document.getElementById('question-text').textContent = q.question;
-            const optionsList = document.getElementById('options-list');
-            optionsList.innerHTML = '';
-            q.options.forEach((option, index) => {
-                const li = document.createElement('li');
-                li.textContent = option;
-                li.onclick = () => selectOption(index);
-                optionsList.appendChild(li);
-            });
-            answered = false;
-            document.getElementById('next-btn').style.display = 'none';
-            document.getElementById('score').style.display = 'none';
+        if (selectedIndex === q.correct) {
+            score++;
         }
 
-        function selectOption(selectedIndex) {
-            if (answered) return;
-            answered = true;
-            const q = quizData[currentQuestionIndex];
-            const options = document.querySelectorAll('#options-list li');
-            
-            options.forEach((option, index) => {
-                if (index === q.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedIndex && index !== q.correct) {
-                    option.classList.add('incorrect');
-                }
-            });
+        feedback.textContent = `Tip: ${q.explanation}`;
+        feedback.style.display = 'block';
+        nextBtn.style.display = 'inline-block';
+    }
 
-            if (selectedIndex === q.correct) {
-                score++;
-            }
-
-            setTimeout(() => {
-                document.getElementById('next-btn').style.display = 'inline-block';
-            }, 1500);
-        }
-
-        function checkAnswer() {
-            // This is handled by selectOption
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                loadQuestion();
-            } else {
-                showScore();
-            }
-        }
-
-        function showScore() {
-            document.getElementById('quiz-container').innerHTML = `
-                <h3>Your Score: ${score}/${quizData.length}</h3>
-                <p>${Math.round((score/quizData.length)*100)}% Correct!</p>
-                <button onclick="restartQuiz()">Restart Quiz</button>
-            `;
-        }
-
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            document.getElementById('quiz-container').innerHTML = `
-                <div class="quiz-question" id="current-question">
-                    <div class="question-text" id="question-text"></div>
-                    <ul class="options" id="options-list"></ul>
-                </div>
-                <button onclick="checkAnswer()">Submit Answer</button>
-                <div class="score" id="score" style="display: none;"></div>
-                <button onclick="nextQuestion()" id="next-btn" style="display: none;">Next Question</button>
-                <button onclick="restartQuiz()" id="restart-btn" style="display: none;">Restart Quiz</button>
-            `;
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
             loadQuestion();
+        } else {
+            showFinalScore();
         }
+    }
 
-        // Load first question
-        loadQuestion();
-    </script>
+    function showFinalScore() {
+        const container = document.getElementById('quiz-container');
+        const percentage = Math.round((score / quizData.length) * 100);
+        
+        container.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <h2 style="color: #2e7d32; font-size: 2em;">Quiz Finished!</h2>
+                <p style="font-size: 1.5em; margin: 20px 0;">Your Score: ${score} / ${quizData.length}</p>
+                <div style="background: #f1f2f6; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                    <p>That is <strong>${percentage}%</strong> correct!</p>
+                </div>
+                <button onclick="location.reload()">Restart Quiz</button>
+            </div>
+        `;
+    }
+
+    // Initialize
+    loadQuestion();
+</script>
+
 </body>
 </html>
