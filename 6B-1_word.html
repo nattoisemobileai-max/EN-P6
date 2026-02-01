@@ -135,26 +135,24 @@
         </div>
     </div>
 
+    <!-- Add this button inside the 'nav-footer' div in your HTML -->
     <div class="nav-footer">
         <button class="btn btn-prev" onclick="changeCard(-1)">Previous</button>
+        
+        <!-- New Quiz Link Button -->
+        <a href="unit6-quiz.html" style="text-decoration: none; flex: 1;">
+            <button class="btn" style="background: #ffc800; border-bottom: 4px solid #e5a500; color: white; width: 100%;">
+                Unit Quiz
+            </button>
+        </a>
+
         <button class="btn btn-next" onclick="changeCard(1)">Next</button>
     </div>
+    
     <div class="counter" id="counter">1 / 6</div>
 </div>
     
-<!-- Add this button inside the 'nav-footer' div in your HTML -->
-<div class="nav-footer">
-    <button class="btn btn-prev" onclick="changeCard(-1)">Previous</button>
-    
-    <!-- New Quiz Link Button -->
-    <a href="unit6-quiz.html" style="text-decoration: none; flex: 1;">
-        <button class="btn" style="background: #ffc800; border-bottom: 4px solid #e5a500; color: white; width: 100%;">
-            Unit Quiz
-        </button>
-    </a>
 
-    <button class="btn btn-next" onclick="changeCard(1)">Next</button>
-</div>
 
 <script>
     const DATA_URL = 'https://raw.githubusercontent.com/nattoisemobileai-max/EN-P6/main/words_6B-1.json';
