@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What should we use at home to save energy?",
+    "options": ["Old light bulbs", "Energy-efficient bulbs", "Brightest bulbs", "Large bulbs"],
+    "correct": 1,
+    "explanation": "We should use energy-efficient bulbs at home because it saves energy."
+  },
+  {
+    "question": "What should you do before you leave home?",
+    "options": ["Turn the lights on", "Leave the door open", "Turn the lights off", "Turn on the TV"],
+    "correct": 2,
+    "explanation": "Please turn the lights off before you leave home."
+  },
+  {
+    "question": "Why would someone want to turn the air conditioner down?",
+    "options": ["They feel hot", "They feel cold", "It is too quiet", "They are leaving"],
+    "correct": 1,
+    "explanation": "If someone feels cold, they should turn the air conditioner down."
+  },
+  {
+    "question": "What does Rita encourage her classmates to do?",
+    "options": ["Buy new bags", "Throw away plastic", "Reuse plastic bags", "Use paper bags"],
+    "correct": 2,
+    "explanation": "Rita always encourages her classmates to reuse plastic bags."
+  },
+  {
+    "question": "How can we reduce waste with plastic bottles?",
+    "options": ["Throwing them away", "Recycling them", "Burning them", "Buying more"],
+    "correct": 1,
+    "explanation": "We can reduce waste by recycling paper, plastic bottles, and cans."
+  },
+  {
+    "question": "Where did the speaker help pick up rubbish?",
+    "options": ["In the school", "In the country park", "At the beach", "In the street"],
+    "correct": 1,
+    "explanation": "The speaker helped pick up rubbish in the country park."
+  }
+]
