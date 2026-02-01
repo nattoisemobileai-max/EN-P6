@@ -34,5 +34,47 @@
     "sentence": "I helped pick up rubbish in the country park.",
     "explanation": "Cleaning up litter helps protect our natural environment and wildlife.",
     "image_id": "file:1"
+  },
+  {
+    "term": "use disposable batteries",
+    "sentence": "To protect our environment, we should avoid using disposable batteries.",
+    "explanation": "Disposable batteries create hazardous waste; avoiding them helps nature.",
+    "image_id": "file:7"
+  },
+  {
+    "term": "throw away paper/plastic bottles/cans",
+    "sentence": "Do not throw away these cans. Please recycle them.",
+    "explanation": "Items like cans and bottles should be recycled instead of being thrown away.",
+    "image_id": "file:12"
+  },
+  {
+    "term": "throw away leftovers",
+    "sentence": "If you throw away leftovers, you will create a lot of food waste.",
+    "explanation": "Throwing away uneaten food contributes to significant food waste issues.",
+    "image_id": "file:11"
+  },
+  {
+    "term": "leave the taps on",
+    "sentence": "If you leave the taps on, you will waste a lot of water.",
+    "explanation": "Always turn off taps to prevent wasting our precious water resources.",
+    "image_id": "file:10"
+  },
+  {
+    "term": "have long showers",
+    "sentence": "To save water, we should not have long showers.",
+    "explanation": "Shortening your shower time is an effective way to conserve water.",
+    "image_id": "file:9"
+  },
+  {
+    "term": "use up leftovers",
+    "sentence": "I always use up leftovers to reduce food waste.",
+    "explanation": "Using up all your food helps minimize the amount of waste we produce.",
+    "image_id": "file:8"
+  },
+  {
+    "term": "use rechargeable batteries",
+    "sentence": "We can save energy by using rechargeable batteries.",
+    "explanation": "Rechargeable batteries are better for the environment because they can be reused.",
+    "image_id": "file:7"
   }
 ]
