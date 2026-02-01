@@ -1,0 +1,38 @@
+[
+  {
+    "term": "use energy-efficient bulbs",
+    "sentence": "We should use energy-efficient bulbs at home. It saves energy.",
+    "explanation": "Energy-efficient bulbs help reduce electricity consumption.",
+    "image_id": "file:13"
+  },
+  {
+    "term": "turn the lights off",
+    "sentence": "Please turn the lights off before you leave home.",
+    "explanation": "Always remember to switch off lights to prevent wasting power.",
+    "image_id": "file:15"
+  },
+  {
+    "term": "turn the air conditioner down",
+    "sentence": "Please turn the air conditioner down. I feel cold.",
+    "explanation": "Lowering the intensity (raising the temperature) of the AC saves energy.",
+    "image_id": "file:17"
+  },
+  {
+    "term": "reuse plastic bags",
+    "sentence": "Rita always encourages her classmates to reuse plastic bags.",
+    "explanation": "Reusing bags reduces the amount of plastic waste in landfills.",
+    "image_id": "file:19"
+  },
+  {
+    "term": "recycle bottles and cans",
+    "sentence": "We can reduce waste by recycling plastic bottles.",
+    "explanation": "Recycling gives a second life to materials like paper, plastic, and metal.",
+    "image_id": "file:21"
+  },
+  {
+    "term": "pick up rubbish",
+    "sentence": "I helped pick up rubbish in the country park.",
+    "explanation": "Cleaning up litter helps protect our natural environment and wildlife.",
+    "image_id": "file:23"
+  }
+]
