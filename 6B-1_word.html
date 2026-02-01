@@ -3,348 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 6: Words & Sentences Mastery</title>
+    <title>Unit 6B-1: Revision Cards</title>
     <style>
         :root {
             --duo-green: #58cc02;
             --duo-green-dark: #46a302;
             --duo-blue: #1cb0f6;
+            --duo-blue-dark: #1899d6;
             --duo-text: #4b4b4b;
             --duo-gray: #e5e5e5;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
-            margin: 0;
-            background-color: #fff;
+            font-family: 'din-round', sans-serif, Arial;
+            background-color: #ffffff;
             color: var(--duo-text);
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+            padding-bottom: 100px;
         }
 
         .container {
             width: 100%;
             max-width: 600px;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            text-align: center;
         }
 
-        /* Header & Progress */
-        .progress-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 20px 0;
-        }
-
-        .progress-bg {
-            flex-grow: 1;
-            height: 14px;
-            background: var(--duo-gray);
-            border-radius: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--duo-green);
-            border-radius: 10px;
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Challenge Area */
-        .challenge-box {
-            margin-top: 30px;
-        }
-
-        .instruction {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        .vocab-term {
-            color: var(--duo-blue);
-            font-size: 28px;
-            margin-bottom: 15px;
-            display: inline-block;
-            border-bottom: 2px dashed var(--duo-blue);
-        }
-
-        .sentence-box {
-            font-size: 20px;
-            line-height: 1.5;
-            background: #f7f7f7;
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid var(--duo-gray);
+        .header {
+            padding: 40px 0;
+            border-bottom: 2px solid var(--duo-gray);
             margin-bottom: 30px;
         }
 
-        .blank {
-            display: inline-block;
-            min-width: 80px;
-            border-bottom: 2px solid #afafaf;
-            color: var(--duo-green-dark);
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* Grid Options */
-        .options-grid {
-            display: grid;
-            gap: 12px;
-        }
-
-        .option {
-            padding: 15px;
-            border: 2px solid var(--duo-gray);
-            border-bottom: 4px solid var(--duo-gray);
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.1s;
-        }
-
-        .option:hover { background: #f0f0f0; }
-        .option.selected {
-            background-color: #ddf4ff;
-            border-color: #84d8ff;
+        .header h1 {
+            font-size: 28px;
             color: var(--duo-blue);
         }
 
-        /* Footer Feedback */
-        .footer {
+        .card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .revision-card {
+            background: white;
+            border: 2px solid var(--duo-gray);
+            border-bottom: 5px solid var(--duo-gray);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: default;
+        }
+
+        .revision-card:hover {
+            border-color: var(--duo-blue);
+            transform: scale(1.02);
+        }
+
+        .word-label {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #afafaf;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .key-term {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--duo-green-dark);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .sentence-box {
+            font-size: 19px;
+            line-height: 1.6;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+            color: var(--duo-text);
+        }
+
+        .sentence-box b {
+            color: var(--duo-blue);
+            background: #e1f5fe;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        /* Fixed Navigation Footer */
+        .footer-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 30px;
             background: white;
             border-top: 2px solid var(--duo-gray);
+            padding: 20px;
             display: flex;
             justify-content: center;
-        }
-
-        .feedback-area {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-check {
-            background: var(--duo-green);
-            color: white;
-            border: none;
-            padding: 15px 45px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 16px;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 4px 0 var(--duo-green-dark);
-        }
-
-        .btn-check:disabled {
-            background: var(--duo-gray);
-            color: #afafaf;
-            box-shadow: 0 4px 0 #cfcfcf;
-            cursor: not-allowed;
-        }
-
-        /* Overlay for correct/wrong */
-        .overlay {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            display: none;
+            gap: 20px;
             z-index: 100;
         }
 
-        .overlay.correct { background: #d7ffb8; color: #46a302; }
-        .overlay.wrong { background: #ffdfe0; color: #ee2a2a; }
+        .nav-btn {
+            background: var(--duo-blue);
+            color: white;
+            border: none;
+            border-bottom: 4px solid var(--duo-blue-dark);
+            padding: 12px 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
 
-        .result-screen {
-            display: none;
-            text-align: center;
-            padding-top: 60px;
+        .nav-btn:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+
+        .nav-btn.secondary {
+            background: #fff;
+            color: var(--duo-blue);
+            border: 2px solid var(--duo-gray);
+            border-bottom: 4px solid var(--duo-gray);
+        }
+
+        .loading-spinner {
+            font-size: 20px;
+            color: #afafaf;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="progress-header">
-        <span style="color:#afafaf; font-size:20px; cursor:pointer;">✕</span>
-        <div class="progress-bg"><div class="progress-fill" id="progress"></div></div>
+    <div class="header">
+        <h1>Unit 6 Revision</h1>
+        <p style="color:#afafaf; margin-top:5px;">Study words and sentences</p>
     </div>
 
-    <div id="quiz-content">
-        <div class="challenge-box">
-            <div class="instruction">Complete the sentence for this word:</div>
-            <div class="vocab-term" id="term-display"></div>
-            
-            <div class="sentence-box" id="sentence-display">
-                <!-- Sentence with blank -->
-            </div>
-
-            <div class="options-grid" id="options-grid">
-                <!-- Choice buttons -->
-            </div>
-        </div>
-    </div>
-
-    <div class="result-screen" id="result-screen">
-        <h1 style="font-size: 40px; color: #ffc800;">Lesson Complete!</h1>
-        <p style="font-size: 24px; margin: 20px 0;">You've mastered Unit 6 Vocabulary!</p>
-        <button class="btn-check" onclick="location.reload()" style="background: var(--duo-blue); box-shadow: 0 4px 0 #1899d6;">Practice Again</button>
+    <div id="loading" class="loading-spinner">Loading Revision Cards...</div>
+    
+    <div class="card-stack" id="revision-stack">
+        <!-- Cards will appear here -->
     </div>
 </div>
 
-<div class="footer" id="footer">
-    <div class="feedback-area">
-        <div id="hint" style="font-weight:bold; color:#afafaf;">Pick the missing word</div>
-        <button class="btn-check" id="check-btn" disabled onclick="handleCheck()">Check</button>
-    </div>
-</div>
-
-<div class="overlay" id="overlay">
-    <div style="max-width:600px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-            <h2 id="overlay-title" style="margin-bottom:5px;">Excellent!</h2>
-            <p id="overlay-msg"></p>
-        </div>
-        <button class="btn-check" id="continue-btn" onclick="nextQuestion()">Continue</button>
-    </div>
+<div class="footer-nav">
+    <button class="nav-btn secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Top</button>
+    <button class="nav-btn" onclick="location.reload()">Refresh Data</button>
 </div>
 
 <script>
-    const quizData = [
-        {
-            "term": "use energy-efficient bulbs",
-            "sentence": "We should use ________ bulbs at home. It saves energy.",
-            "options": ["energy-efficient", "expensive", "bright", "old"],
-            "correct": "energy-efficient",
-            "full": "We should use energy-efficient bulbs at home. It saves energy."
-        },
-        {
-            "term": "turn the lights off",
-            "sentence": "Please turn the lights ________ before you leave home.",
-            "options": ["on", "off", "up", "down"],
-            "correct": "off",
-            "full": "Please turn the lights off before you leave home."
-        },
-        {
-            "term": "turn the air conditioner down",
-            "sentence": "Please turn the air conditioner ________. I feel cold.",
-            "options": ["on", "up", "down", "off"],
-            "correct": "down",
-            "full": "Please turn the air conditioner down. I feel cold."
-        },
-        {
-            "term": "reuse plastic bags",
-            "sentence": "Rita always encourages her classmates to ________ plastic bags.",
-            "options": ["throw", "reuse", "burn", "buy"],
-            "correct": "reuse",
-            "full": "Rita always encourages her classmates to reuse plastic bags."
-        },
-        {
-            "term": "recycle bottles/cans",
-            "sentence": "We can reduce waste by ________ plastic bottles.",
-            "options": ["recycling", "making", "dropping", "losing"],
-            "correct": "recycling",
-            "full": "We can reduce waste by recycling plastic bottles."
-        },
-        {
-            "term": "pick up rubbish",
-            "sentence": "I helped ________ rubbish in the country park.",
-            "options": ["make", "pick up", "find", "drop"],
-            "correct": "pick up",
-            "full": "I helped pick up rubbish in the country park."
-        }
-    ];
+    // GitHub JSON URL
+    const DATA_URL = 'https://raw.githubusercontent.com/nattoisemobileai-max/EN-P6/main/quizData-6B-1.json';
 
-    let currentIdx = 0;
-    let selectedAnswer = null;
+    async function loadRevisionMode() {
+        try {
+            const response = await fetch(DATA_URL);
+            const data = await response.json();
+            
+            const stack = document.getElementById('revision-stack');
+            document.getElementById('loading').style.display = 'none';
 
-    function loadQuestion() {
-        const q = quizData[currentIdx];
-        document.getElementById('term-display').textContent = q.term;
-        document.getElementById('sentence-display').innerHTML = q.sentence.replace('________', '<span class="blank">?</span>');
-        
-        const grid = document.getElementById('options-grid');
-        grid.innerHTML = '';
-        q.options.forEach(opt => {
-            const btn = document.createElement('div');
-            btn.className = 'option';
-            btn.textContent = opt;
-            btn.onclick = () => selectOption(opt, btn);
-            grid.appendChild(btn);
-        });
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'revision-card';
 
-        const progress = (currentIdx / quizData.length) * 100;
-        document.getElementById('progress').style.width = progress + '%';
-        
-        selectedAnswer = null;
-        document.getElementById('check-btn').disabled = true;
-        document.getElementById('footer').style.display = 'flex';
-        document.getElementById('overlay').style.display = 'none';
-    }
+                // Extract the core word from the explanation or option
+                const correctWord = item.options[item.correct];
+                
+                // Highlight the key word in the explanation sentence
+                let formattedSentence = item.explanation.replace(
+                    new RegExp(correctWord, 'gi'), 
+                    `<b>${correctWord}</b>`
+                );
 
-    function selectOption(val, el) {
-        selectedAnswer = val;
-        document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-        el.classList.add('selected');
-        document.getElementById('check-btn').disabled = false;
-    }
-
-    function handleCheck() {
-        const q = quizData[currentIdx];
-        const overlay = document.getElementById('overlay');
-        const title = document.getElementById('overlay-title');
-        const msg = document.getElementById('overlay-msg');
-        const contBtn = document.getElementById('continue-btn');
-
-        document.getElementById('footer').style.display = 'none';
-        overlay.style.display = 'block';
-
-        if (selectedAnswer === q.correct) {
-            overlay.className = 'overlay correct';
-            title.textContent = 'You are right!';
-            msg.textContent = '';
-            contBtn.style.background = '#58cc02';
-            contBtn.style.boxShadow = '0 4px 0 #46a302';
-            document.querySelector('.blank').textContent = selectedAnswer;
-        } else {
-            overlay.className = 'overlay wrong';
-            title.textContent = 'Correct solution:';
-            msg.textContent = q.correct;
-            contBtn.style.background = '#ff4b4b';
-            contBtn.style.boxShadow = '0 4px 0 #ea2b2b';
+                card.innerHTML = `
+                    <div class="word-label">Key Word</div>
+                    <span class="key-term">${correctWord}</span>
+                    <div class="word-label" style="margin-top:20px;">In a Sentence</div>
+                    <div class="sentence-box">${formattedSentence}</div>
+                `;
+                stack.appendChild(card);
+            });
+        } catch (error) {
+            document.getElementById('loading').textContent = "Failed to load cards. Please check your internet.";
+            console.error(error);
         }
     }
 
-    function nextQuestion() {
-        currentIdx++;
-        if (currentIdx < quizData.length) {
-            loadQuestion();
-        } else {
-            document.getElementById('progress').style.width = '100%';
-            document.getElementById('quiz-content').style.display = 'none';
-            document.getElementById('result-screen').style.display = 'block';
-            document.getElementById('footer').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
-    }
-
-    loadQuestion();
+    loadRevisionMode();
 </script>
+
 </body>
 </html>
